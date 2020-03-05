@@ -15,65 +15,83 @@
         <div class="columns">
             <div class="column">
                 <div class="container">
-                <h1 id="a" class="title"></h1>
-            
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control has-icons-left">
-                    <input class="input" type="text" placeholder="Name">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
+                    <h1 id="a" class="title"></h1>
+                <div class="columns">
+                    <div class="field column">
+                        <label class="label">Name</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" required id="name" type="text" placeholder="Name">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden" id="name-help-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field column">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" required id="email" type="email" placeholder="Email input">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden" id="email-help-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </div>
+                        <p class="help is-danger is-hidden" id="email-help">This email is invalid</p>
+                    </div>
+                </div>
+                <div class="columns">
+                <div class="column">
+                    <label class="label">Salary Expectation</label>
+                <div class="field has-addons">
+                    <div class="control">
+                    <span class="select">
+                        <select>
+                        <option>$</option>
+                        <option>£</option>
+                        <option>€</option>
+                        </select>
                     </span>
+                    </div>
+                    <p class="control">
+                    <input class="input" type="text" placeholder="£$€">
+                    </p>
                 </div>
             </div>
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control has-icons-left">
-                    <input class="input" type="email" placeholder="Email input">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
+                <div class="file has-name column" id="colour-me">
+                    <label class="label">Upload Your CV</label>
+                    <label class="file-label">
+                    <input class="file-input" required type="file" id="upload" name="resume" oninput="updateFile()">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                        Choose a file…
+                        </span>
+                        <span class="file-name" id="fileName">
+                            No file uploaded
+                        </span>
                     </span>
+                    </label>
                 </div>
-            </div>
-            <label class="label">Salary Expectation</label>
-            <div class="field has-addons">
-                <div class="control">
-                  <span class="select">
-                    <select>
-                      <option>$</option>
-                      <option>£</option>
-                      <option>€</option>
-                    </select>
-                  </span>
                 </div>
-                <p class="control">
-                  <input class="input" type="text" placeholder="£$€">
-                </p>
-            </div>
-            <label class="label">Upload Your CV</label>
-            <div class="file has-name">
-                <label class="file-label">
-                  <input class="file-input" type="file" id="upload" name="resume" oninput="updateFile()">
-                  <span class="file-cta">
-                    <span class="file-icon">
-                      <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                      Choose a file…
-                    </span>
-                    <span class="file-name" id="fileName">
-                        No file uploaded
-                      </span>
-                  </span>
-                </label>
-              </div>
-              <div class="field">
-                <label class="label">Tell us a bit about you</label>
-                <div class="control">
-                    <textarea class="textarea" type="text" placeholder="A bit about you..."></textarea>
+                <div class="field">
+                    <label class="label">Tell us a bit about you</label>
+                    <div class="control">
+                        <textarea class="textarea" required id="aboutYou" type="text" placeholder="A bit about you..."></textarea>
+                    </div>
                 </div>
-            </div>
-            <button class="button is-primary" type="submit" onclick="transmit()" id="submitter">Submit</button>
+                <button class="button is-primary" type="submit" onclick="transmit()" id="submitter"><p>Submit</p></button>
         </div>
         </div>
         <div class="column is-one-quarter has-background-light">
@@ -155,10 +173,96 @@
             }
         }
 
+        email = document.getElementById("email")
+
+        email.addEventListener('keyup', function(event){
+            isValidEmail = email.checkValidity()
+            console.log(isValidEmail)
+            if(!isValidEmail){
+                email.classList.add("is-danger")
+                document.getElementById("email-help-icon").classList.remove("is-hidden")
+                document.getElementById("email-help").classList.remove("is-hidden")
+            }
+            if(isValidEmail){
+                email.classList.remove("is-danger")
+                document.getElementById("email-help-icon").classList.add("is-hidden")
+                document.getElementById("email-help").classList.add("is-hidden")
+            }
+        })
+
+        nameIn = document.getElementById("name")
+
+        nameIn.addEventListener('keyup', function(event){
+            isValidName = nameIn.checkValidity()
+            console.log(isValidName)
+            if(!isValidName){
+                nameIn.classList.add("is-danger")
+                document.getElementById("name-help-icon").classList.remove("is-hidden")
+            }
+            if(isValidName){
+                nameIn.classList.remove("is-danger")
+                document.getElementById("name-help-icon").classList.add("is-hidden")
+            }
+        })
+
+        desc = document.getElementById("aboutYou")
+
+        desc.addEventListener('keyup', function(event){
+            isValidDesc = desc.checkValidity()
+            console.log(isValidDesc)
+            if(!isValidDesc){
+                desc.classList.add("is-danger")
+            }
+            if(isValidDesc){
+                desc.classList.remove("is-danger")
+            }
+        })
+
+        file = document.getElementById("upload")
+
+        file.addEventListener('change', function(event){
+            isValidFile = file.checkValidity()
+            console.log(isValidFile)
+            if(!isValidFile){
+                document.getElementById("colour-me").classList.add("is-danger")
+            }
+            if(isValidFile){
+                document.getElementById("colour-me").classList.remove("is-danger")
+            }
+        })
+
         function transmit(){
             button = document.getElementById("submitter")
+            name = document.getElementById("name")
             button.classList.add("is-loading")
-            setTimeout(() => { window.open("success.html", "_self")}, 1000)
+            isValidName = document.getElementById("name").checkValidity()
+            isValidDesc = document.getElementById("aboutYou").checkValidity()
+            email = document.getElementById("email")
+            isValidEmail = email.checkValidity()
+            file = document.getElementById("upload")
+            isValidFile = file.checkValidity()
+            if(!isValidName){
+                document.getElementById("name").classList.add("is-danger")
+                document.getElementById("name-help-icon").classList.remove("is-hidden")
+            }
+            if(!isValidDesc){
+                document.getElementById("aboutYou").classList.add("is-danger")
+            }
+            if(!isValidEmail){
+                email.classList.add("is-danger")
+                document.getElementById("email-help-icon").classList.remove("is-hidden")
+                document.getElementById("email-help").classList.remove("is-hidden")
+            }
+            if(!isValidFile){
+                document.getElementById("colour-me").classList.add("is-danger")
+            }
+            if(isValidDesc && isValidEmail && isValidFile && isValidName){
+              setTimeout(() => { window.open("success.html", "_self")}, 1000)
+            } else {
+                button.classList.remove("is-loading")
+                button.innerHTML = '<i class="fas fa-exclamation-triangle"></i>'
+                setTimeout(() => { button.innerHTML = "Submit"}, 5000)
+            }
         }
     </script>
 </body>

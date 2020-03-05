@@ -43,3 +43,7 @@ body {
 .card-footer{
   margin-top: auto
 }
+
+.is-hidden{
+    display: none;
+}
