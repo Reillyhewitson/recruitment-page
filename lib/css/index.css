@@ -47,3 +47,12 @@ body {
 .is-hidden{
     display: none;
 }
+
+.navbar-middle {
+    justify-content: space-around;
+    margin-left: auto; }
+
+
+.is-custom{
+    background-color: #56d656;
+}
