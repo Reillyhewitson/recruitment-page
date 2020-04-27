@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Beans Web - Apply</title>
+    <link rel="stylesheet" href="lib/css/bulma.css">
+    <link rel="stylesheet" href="lib/css/index.css">
+    <link rel="stylesheet" href="lib/css/bulma-timeline.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</head>
+<body>
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <div class="container">
+                    <h1 id="a" class="title"></h1>
+                <div class="columns">
+                    <div class="field column">
+                        <label class="label">Name</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" required id="name" type="text" placeholder="Name">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden" id="name-help-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field column">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" required id="email" type="email" placeholder="Email input">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden" id="email-help-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <span class="icon is-small is-right is-danger is-hidden">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </div>
+                        <p class="help is-danger is-hidden" id="email-help">This email is invalid</p>
+                    </div>
+                </div>
+                <div class="columns">
+                <div class="column">
+                    <label class="label">Salary Expectation</label>
+                <div class="field has-addons">
+                    <div class="control">
+                    <span class="select">
+                        <select>
+                        <option>$</option>
+                        <option>£</option>
+                        <option>€</option>
+                        </select>
+                    </span>
+                    </div>
+                    <p class="control">
+                    <input class="input" type="text" placeholder="£$€">
+                    </p>
+                </div>
+            </div>
+                <div class="file has-name column" id="colour-me">
+                    <label class="label">Upload Your CV</label>
+                    <label class="file-label">
+                    <input class="file-input" required type="file" id="upload" name="resume" oninput="updateFile()">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                        Choose a file…
+                        </span>
+                        <span class="file-name" id="fileName">
+                            No file uploaded
+                        </span>
+                    </span>
+                    </label>
+                </div>
+                </div>
+                <div class="field">
+                    <label class="label">Tell us a bit about you</label>
+                    <div class="control">
+                        <textarea class="textarea" required id="aboutYou" type="text" placeholder="A bit about you..."></textarea>
+                    </div>
+                </div>
+                <button class="button is-primary" type="submit" onclick="transmit()" id="submitter"><p>Submit</p></button>
+        </div>
+        </div>
+        <div class="column is-one-quarter has-background-light">
+            <div class="timeline">
+            <header class="timeline-header">
+                <span class="tag is-medium is-primary">Begin</span>
+            </header>
+            <div class="timeline-item is-success">
+                <div class="timeline-marker is-icon is-success">
+                    <i class="fas fa-flag"></i>
+                </div>
+                <div class="timeline-content">
+                    <p class="heading">Apply</p>
+                    <p>You're here now! Great work!</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker is-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div class="timeline-content">
+                    <p class="heading">First Interview</p>
+                    <p>This makes sure you know your stuff. No need to swot up as it's nothing too hard.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker is-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="timeline-content">
+                    <p class="heading">Second Interview</p>
+                    <p>Another interview with your (hopefully) future team mates. Come as yourself and if you fit in you'll get the job!</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker is-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <div class="timeline-content">
+                    <p class="heading">Contract</p>
+                    <p>Formalities to get you through the door.</p>
+                </div>
+            </div>
+            <header class="timeline-header">
+                <span class="tag is-medium is-primary">Hired!</span>
+            </header>
+        </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var job = getParameterByName("j");
+        console.log(job)
+        document.getElementById("a").innerText = "Thank you for applying to become our new "+job+"!"
+
+        function updateFile(){
+            var fullPath = document.getElementById('upload').value;
+            if (fullPath) {
+                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                var filename = fullPath.substring(startIndex);
+                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                    filename = filename.substring(1);
+                }
+                document.getElementById("fileName").innerText = filename;
+            }
+        }
+
+        email = document.getElementById("email")
+
+        email.addEventListener('keyup', function(event){
+            isValidEmail = email.checkValidity()
+            console.log(isValidEmail)
+            if(!isValidEmail){
+                email.classList.add("is-danger")
+                document.getElementById("email-help-icon").classList.remove("is-hidden")
+                document.getElementById("email-help").classList.remove("is-hidden")
+            }
+            if(isValidEmail){
+                email.classList.remove("is-danger")
+                document.getElementById("email-help-icon").classList.add("is-hidden")
+                document.getElementById("email-help").classList.add("is-hidden")
+            }
+        })
+
+        nameIn = document.getElementById("name")
+
+        nameIn.addEventListener('keyup', function(event){
+            isValidName = nameIn.checkValidity()
+            console.log(isValidName)
+            if(!isValidName){
+                nameIn.classList.add("is-danger")
+                document.getElementById("name-help-icon").classList.remove("is-hidden")
+            }
+            if(isValidName){
+                nameIn.classList.remove("is-danger")
+                document.getElementById("name-help-icon").classList.add("is-hidden")
+            }
+        })
+
+        desc = document.getElementById("aboutYou")
+
+        desc.addEventListener('keyup', function(event){
+            isValidDesc = desc.checkValidity()
+            console.log(isValidDesc)
+            if(!isValidDesc){
+                desc.classList.add("is-danger")
+            }
+            if(isValidDesc){
+                desc.classList.remove("is-danger")
+            }
+        })
+
+        file = document.getElementById("upload")
+
+        file.addEventListener('change', function(event){
+            isValidFile = file.checkValidity()
+            console.log(isValidFile)
+            if(!isValidFile){
+                document.getElementById("colour-me").classList.add("is-danger")
+            }
+            if(isValidFile){
+                document.getElementById("colour-me").classList.remove("is-danger")
+            }
+        })
+
+        function transmit(){
+            button = document.getElementById("submitter")
+            name = document.getElementById("name")
+            button.classList.add("is-loading")
+            isValidName = document.getElementById("name").checkValidity()
+            isValidDesc = document.getElementById("aboutYou").checkValidity()
+            email = document.getElementById("email")
+            isValidEmail = email.checkValidity()
+            file = document.getElementById("upload")
+            isValidFile = file.checkValidity()
+            if(!isValidName){
+                document.getElementById("name").classList.add("is-danger")
+                document.getElementById("name-help-icon").classList.remove("is-hidden")
+            }
+            if(!isValidDesc){
+                document.getElementById("aboutYou").classList.add("is-danger")
+            }
+            if(!isValidEmail){
+                email.classList.add("is-danger")
+                document.getElementById("email-help-icon").classList.remove("is-hidden")
+                document.getElementById("email-help").classList.remove("is-hidden")
+            }
+            if(!isValidFile){
+                document.getElementById("colour-me").classList.add("is-danger")
+            }
+            if(isValidDesc && isValidEmail && isValidFile && isValidName){
+              setTimeout(() => { window.open("success.html", "_self")}, 1000)
+            } else {
+                button.classList.remove("is-loading")
+                button.innerHTML = '<i class="fas fa-exclamation-triangle"></i>'
+                setTimeout(() => { button.innerHTML = "Submit"}, 5000)
+            }
+        }
+    </script>
+</body>
+</html>

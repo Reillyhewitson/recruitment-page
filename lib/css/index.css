@@ -28,3 +28,31 @@ body {
 .has-padding-right{
     padding-right: 10px;
 }
+
+.has-image-centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.card{
+  width: 100%
+  display: flex
+  flex-direction: column
+}
+
+.card-footer{
+  margin-top: auto
+}
+
+.is-hidden{
+    display: none;
+}
+
+.navbar-middle {
+    justify-content: space-around;
+    margin-left: auto; }
+
+
+.is-custom{
+    background-color: #56d656;
+}
